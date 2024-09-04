@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Wakdo - Bienvenue sur l'interface de gestion des restaurants{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <link rel="stylesheet" href="{{ asset("css/style.css") }}">
+    </head>
+    <body id="page-connexion" class="flex align-center justify-center">
+        <div class="large-4-12 flex gap">
+            <h1>Connexion</h1>
+            <form method="post" class="large-12-12 flex gap direction-column">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                <label for="username">Email :</label>
+                <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
+                <label for="password">Mot de passe :</label>
+                <input type="password" name="_password" id="password" autocomplete="current-password" required>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <button class="align-self-center" type="submit">
+                    Connexion
+                </button>
+            </form>
+        </div>
+    </body>
+    <script src="{{ asset('js/app.js') }}"></script>
+</html>

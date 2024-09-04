@@ -1,0 +1,15 @@
+<article class="large-6-12 flex gap justify-between">
+	<div class="large-4-12">
+		<img class="responsive" src="{{ asset(images_affichage_directory_collaborateur ~ collaborateur.photo) }}" alt="">
+	</div>
+	<div class="description-article large-8-12 flex gap direction-column justify-between">
+		<h3>{{ collaborateur.nom ~ " " ~ collaborateur.prenom }}</h3>
+		<p>
+			{{ collaborateur.email }}<br/>
+			Embauché le {{ collaborateur.dateEmbauche |date('d-m-Y') }}
+		</p>
+		<div class="flex gap justify-end">
+			<a class="button primary" href="{{path('collaborateur_detail',{ "id": collaborateur.id })}}" title="Voir les informations sur le {{ collaborateur.nom ~ " " ~ collaborateur.prenom }}">Voir</a>
+		</div>
+	</div>
+</article>

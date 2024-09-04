@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Fonction{% endblock %}
+
+{% block body %}
+<div class="page-container container-full flex gap direction-column align-center">
+    <h1>Modifier la fonction de {{ fonction.intitule }}</h1>
+    <div class="large-12-12 flex gap justify-between">
+        <a class="button secondary" href="{{ path('fonction_index') }}" title="Retour à la liste">Retour à la liste</a>
+        <div class="flex gap">
+            {% if affectations|length == 0 %}
+            {{ include('fonction/_delete_form.html.twig') }}
+            {% endif %}
+        </div>
+    </div>
+    {{ include('fonction/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wakdo - Bienvenue sur l'interface de gestion des restaurants{% endblock %}
+
+{% block body %}
+<div class="page-container container-full flex gap direction-column align-center">
+    <h1>Affectation de {{ collaborateur.nom ~ " " ~ collaborateur.prenom}}</h1>
+    <div class="large-12-12 flex gap">
+        <a class="button secondary" href="{{ path('collaborateur_detail',{ "id": collaborateur.id }) }}" title="Retour au collaborateur">Retour au collaborateur</a>
+    </div>
+    <div class="large-6-12">
+        {{ form_start(form) }}
+        {{ form_row(form.restaurant) }}
+        {{ form_row(form.fonction) }}
+        {{ form_row(form.dateDebut) }}
+        {{ form_widget(form._token) }}
+        {{ form_row(form.submit) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+</div>
+{% endblock %}

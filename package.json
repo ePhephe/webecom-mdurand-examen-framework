@@ -1,0 +1,19 @@
+{
+  "name": "examen-framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+      "build:sass": "sass assets/scss/app.scss public/css/style.css",
+      "watch:sass": "sass --watch assets/scss/main.scss public/css/style.css",
+      "prod:sass": "sass --style=compressed assets/main.scss public/css/style.min.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sass": "^1.77.8"
+  }
+}

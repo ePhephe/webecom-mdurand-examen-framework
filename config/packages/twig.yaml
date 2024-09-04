@@ -1,0 +1,9 @@
+twig:
+    file_name_pattern: '*.twig'
+    globals:
+        images_affichage_directory_restaurant: '%images_affichage_directory_restaurant%'
+        images_affichage_directory_collaborateur: '%images_affichage_directory_collaborateur%'
+
+when@test:
+    twig:
+        strict_variables: true

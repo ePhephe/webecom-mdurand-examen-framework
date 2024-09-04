@@ -1,0 +1,17 @@
+<article class="large-6-12 flex gap justify-between">
+	<div class="large-6-12">
+		<img class="responsive" src="{{ asset(images_affichage_directory_collaborateur ~ affectation.collaborateur.photo) }}" alt="">
+	</div>
+	<div class="description-article large-6-12 flex gap direction-column justify-between">
+		<h3>{{ affectation.collaborateur.nom ~ " " ~ affectation.collaborateur.prenom }}</h3>
+		<p>
+			{{ affectation.collaborateur.email }}<br/>
+			Embauché le {{ affectation.collaborateur.dateEmbauche |date('d-m-Y') }}<br/>
+			{{ affectation.fonction.intitule }}<br/>
+			Affecté le {{ affectation.dateDebut |date('d-m-Y') }}
+		</p>
+		<div class="flex gap justify-end">
+			<a class="button primary" href="{{path('collaborateur_detail',{ "id": affectation.collaborateur.id })}}" title="Voir les informations sur le {{ affectation.collaborateur.nom ~ " " ~ affectation.collaborateur.prenom }}">Voir</a>
+		</div>
+	</div>
+</article>

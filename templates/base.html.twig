@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <link rel="stylesheet" href="{{ asset("css/style.css") }}">
+        {% block stylesheets %}
+        {% endblock %}
+    </head>
+    <body>
+        <header class="large-12-12 flex justify-between align-center">
+            <div class="large-3-12"><a href="{{ path('app_accueil') }}"><img src="{{ asset('images/logo.png') }}" alt=""></a></div>
+            <nav class="large-5-12" aria-label="Menu principale">
+                <ul class="flex justify-between">
+                    <li><a href="{{ path('app_accueil') }}">Restaurants</a></li>
+                    <li><a href="{{ path('collaborateur_index') }}">Collaborateurs</a></li>
+                    <li><a href="{{ path('affectation_index') }}">Affectations</a></li>
+                    <li><a href="{{ path('fonction_index') }}">Fonctions</a></li>
+                    
+                </ul>
+            </nav>
+            <nav class="large-3-12" aria-label="Menu du compte utilisateur">
+                <ul class="flex gap justify-end">
+                    {% if app.user %}
+                    <li><a href="{{ path('profil_index') }}"><img src="{{ asset('images/icons/user.png') }}" alt=""></a></li>
+                    <li><a href="{{ path('app_logout') }}"><img src="{{ asset('images/icons/logout.png') }}" alt=""></a></li>
+                    {% else %}
+                    <li><a href="{{ path('app_login') }}">Se connecter</a></li>
+                    {% endif %}
+                    
+                </ul>
+            </nav>
+        </header>
+        <div class="fixed-header"></div>
+        <!-- Messages Flash Symfony -->
+        <div class="modal-flash flex gap" id="modalFlash">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="large-12-12 {{ label }}" id="messageFlash{{loop.index}}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+        {% block body %}{% endblock %}
+    </body>
+    <script src="{{ asset('js/app.js') }}"></script>
+    {% block javascripts %}
+    {% endblock %}
+</html>

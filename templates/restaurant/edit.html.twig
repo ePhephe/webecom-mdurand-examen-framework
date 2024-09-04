@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wakdo - Bienvenue sur l'interface de gestion des restaurants{% endblock %}
+
+{% block body %}
+<div class="page-container container-full  flex gap direction-column align-center">
+    <h1>Nos restaurants</h1>
+    <div class="large-12-12 flex gap">
+        <a class="button secondary" href="{{ path('app_accueil') }}" title="Retour à la liste">Retour à la liste</a>
+    </div>
+    <div class="large-6-12">
+        {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.adresse) }}
+        {{ form_row(form.code_postal) }}
+        {{ form_row(form.ville) }}
+        <div class="large-12-12 margin-top-20px margin-bottom-20px flex gap">
+            <div class="large-6-12"><img class="responsive" src="{{ asset(images_affichage_directory_restaurant ~ restaurant.photo) }}" alt=""></div>
+            <div class="large-6-12 flex align-center">{{ form_row(form.photo) }}</div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+    <div class="separateur"></div>
+    <div class="large-12-12 flex gap">
+        <a class="button primary" href="{{ path('restaurant_affected',{ "id": restaurant.id }) }}" title="Affecter un collaborateur">Affecter un collaborateur</a>
+    </div>
+    <div class="filtres large-12-12 flex justify-center gap">
+        {{ form_start(formSearch, {'attr': {'class': 'large-11-12'}}) }}
+        {{ form_row(formSearch.search, {'attr': {'placeholder': 'Nom, prénom ou email...'}}) }}
+        {{ form_row(formSearch.fonction) }}
+        {{ form_row(formSearch.date) }}
+        {{ form_row(formSearch._token) }}
+        {{ form_row(formSearch.submit) }}
+        {{ form_end(formSearch, {'render_rest': false}) }}
+    </div>
+	<section class="liste-restaurant large-12-12 flex gap justify-between">
+		<table class="large-12-12">
+            <thead>
+                <tr>
+                    <th>Collaborateur</th>
+                    <th>Poste occupé</th>
+                    <th>Date de début</th>
+                    <th>Date de fin</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for affectation in pagination.items %}
+                <tr>
+                    <td><a href="{{ path('collaborateur_detail',{ "id": affectation.collaborateur.id }) }}" title="Fiche du collaborateur">{{ affectation.collaborateur.nom ~ " " ~ affectation.collaborateur.prenom }}</a></td>
+                    <td>{{ affectation.fonction.intitule }}</td>
+                    <td>{{ affectation.dateDebut |date('d-m-Y') }}</td>
+                    <td>{% if affectation.dateFin is not null %}{{ affectation.dateFin |date('d-m-Y') }}{% endif %}</td>
+                    <td>
+                        <a href="{{ path('collaborateur_affectation_edit',{ "collaborateur": affectation.collaborateur.id, "affectation": affectation.id }) }}" title="Modifier l'affectation">
+                            <img src="{{ asset('images/icons/edit.png') }}" alt="Icone de modification">
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+	</section>
+	<div class="navigation large-12-12 flex justify-between">
+		{{ knp_pagination_render(pagination) }}
+        <div>
+            {% if pagination.getItemNumberPerPage > pagination.getTotalItemCount %}
+            {{ pagination.getTotalItemCount }}
+            {% else %}
+            {{ pagination.getItemNumberPerPage }}
+            {% endif %}
+            Résultats par page - Total de
+            {{ pagination.getTotalItemCount }}
+            résultats
+        </div>
+	</div>
+</div>
+{% endblock %}

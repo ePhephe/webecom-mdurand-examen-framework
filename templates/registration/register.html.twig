@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wakdo - Bienvenue sur l'interface de gestion des restaurants{% endblock %}
+
+{% block body %}
+<div class="page-container container-full flex gap direction-column align-center">
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <h1>Entrée d'un nouvel administrateur</h1>
+
+    <div class="large-12-12 flex gap justify-between">
+        <a class="button secondary" href="{{ path('collaborateur_index') }}" title="Retour à la liste">Retour à la liste</a>
+    </div>
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm, {'attr' : {'class' : 'flex direction-column'}}) }}
+        {{ form_row(registrationForm.nom) }}
+        {{ form_row(registrationForm.prenom) }}
+        {{ form_row(registrationForm.dateEmbauche) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Mot de passe : '
+        }) }}
+
+        <button type="submit" class="align-self-center margin-top-20px">Ajouter</button>
+    {{ form_end(registrationForm) }}
+</div>
+{% endblock %}

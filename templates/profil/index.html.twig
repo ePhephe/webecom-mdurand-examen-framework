@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wakdo - Bienvenue sur l'interface de gestion des restaurants{% endblock %}
+
+{% block body %}
+<div class="page-container container-full flex gap direction-column align-center">
+		<h1>Modifier mes informations</h1>
+		{{ form_start(form, {'attr' : {'class' : 'large-6-12'}}) }}
+		{{ form_row(form.nom) }}
+		{{ form_row(form.prenom) }}
+		{{ form_row(form.email) }}
+        {{ form_row(form.plainPassword) }}
+        {{ form_row(form.confirmPassword) }}
+		{% if app.user %}
+			<div class="large-12-12 flex justify-between">
+				<div class="large-4-12">
+					<img class="responsive" src="{{ asset(images_affichage_directory_collaborateur ~  app.user.photo) }}" alt="">
+				</div>
+				<div class="large-8-12 flex align-center">
+					{{ form_row(form.photo) }}
+				</div>
+			</div>
+		{% else %}
+			{{ form_row(form.photo) }}
+		{% endif %}
+		{{ form_end(form) }}
+</div>
+{% endblock %}

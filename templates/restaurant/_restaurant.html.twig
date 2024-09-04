@@ -1,0 +1,12 @@
+<article class="large-6-12 flex gap justify-between">
+	<div class="large-6-12">
+		<img class="responsive" src="{{ asset(images_affichage_directory_restaurant ~ restaurant.photo) }}" alt="">
+	</div>
+	<div class="description-article large-6-12 flex gap direction-column justify-center">
+		<h3>{{ restaurant.nom }}</h3>
+		<p>{{ restaurant.adresse }}<br/>{{restaurant.codePostal ~ " " ~ restaurant.ville }}</p>
+		<div class="flex gap justify-end">
+			<a class="button secondary" href="{{path('restaurant_detail',{ "id": restaurant.id })}}" title="Voir les informations sur le restaurant {{ restaurant.nom }}">Voir</a>
+		</div>
+	</div>
+</article>
